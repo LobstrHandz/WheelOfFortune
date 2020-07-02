@@ -1,0 +1,115 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.background {
+    height: 100%;
+    background: url(./assets/yak.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.play-button {
+    position: fixed;
+    height: 60px;
+    width: 160px;
+    top: calc(50% - 30px);
+    left: calc(50% - 80px);
+    background: gold;
+    border: 3px solid purple;
+    border-radius: 3px;
+    font-size: 30px;
+    font-weight: bold;
+    color: purple;
+    outline: none;
+    cursor: pointer;
+}
+
+.play-button:hover {
+    background: gold;
+    box-shadow: 0px 0px 3px 3px purple;
+}
+
+.logo {
+    position: fixed;
+    top: -241px;
+    left: calc(50% - 250px);
+    animation: logo-intro 9s linear;
+}
+
+.logo-background {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    left: 150px;
+    border: 3px solid purple;
+    box-shadow: 0px 0px 3px 3px purple;
+    animation: logo-background 0.2s linear infinite;
+}
+
+.logo img {
+    position: absolute;
+}
+
+.circle-container {
+    position: fixed;
+    top: 50vh;
+    left: 15vw;
+    width: 225px;
+    /* transform: rotate(90deg); */
+}
+
+.circle {
+    height: 225px;
+    width: 225px;
+    background: url(./assets/circle.png);
+    background-size: cover;
+    cursor: pointer;
+    transition: transform 10s ease-out;
+}
+
+.circle.disabled {
+    cursor: not-allowed;
+}
+
+.circle-pointer {
+    position: absolute;
+    top: -3px;
+    left: calc(50% - 11px);
+    width: 0; 
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 21px solid black;
+}
+
+@keyframes logo-intro {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(calc(50% + 612px));
+    }
+    100% {
+        transform: translateY(calc(50% + 612px));
+    }
+}
+
+@keyframes logo-background {
+    0% {
+        background: purple;
+    }
+    50% {
+        background: gold;
+    }
+    100% {
+        background: gold;
+    }
+}
