@@ -1,3 +1,4 @@
+// TODO: Сделать правильный рассчёт left для childText в init()
 (function() {
     const values = [ 
         { value: 1, bad: false },
@@ -19,7 +20,8 @@
     ];
     const playButton = document.getElementById('play-button');
     const logo = document.getElementById('logo');
-    const circleContainer = document.getElementById('circle-container');
+    const playArea = document.getElementById('play-area');
+    const resultBlock = document.getElementById('result');
     const circle = document.getElementById('circle');
     const introSound = new Audio('./assets/sounds/intro.mp3');
     const spinSound = new Audio('./assets/sounds/spin.mp3');
@@ -34,7 +36,30 @@
     let spinAllowed = false;
     
     function init() {
+        const circleContainerStep = 500 * 4 / values.length / 2;
+        let deg = 0;
+
         circleStep = 360 / values.length;
+
+        values.forEach((item) => {
+            let child = document.createElement('span');
+            let childText = document.createElement('span');
+
+            child.classList.add('triangle');
+            child.style.transform = `rotate(${deg}deg)`;
+            child.style.borderWidth = `250px ${circleContainerStep}px`;
+            child.style.left = `calc(50% - ${circleContainerStep}px`;
+            childText.innerText = item.value;
+
+            child.append(childText);
+            circle.append(child);
+
+            let childTextDimentions = childText.getBoundingClientRect();
+            childText.style.top = `-${225 - childTextDimentions.width}px`;
+            childText.style.left = `-${childTextDimentions.height / 2}px`;
+
+            deg += circleStep;
+        })
     }
 
     function start() {
@@ -44,7 +69,7 @@
 
         setTimeout(() => {
             logo.classList.add('hidden');
-            circleContainer.classList.remove('hidden');
+            playArea.classList.remove('hidden');
             spinSound.play();
             enableSpin();
         }, 9000);
@@ -62,10 +87,10 @@
 
     function spinCircle() {
         if (spinAllowed) {
+            resultBlock.innerText = 'Вращаем барабан...';
             disableSpin();
             spinMusicSound.play();
             selectedSegment = getRandomNumber(0, values.length - 1);
-            console.log(values[selectedSegment].value);
             circlePointerPosition = getRandomNumber(circleStep * (selectedSegment), circleStep * (selectedSegment + 1) - 1);
             currentSpins += getRandomNumber(5, 8);
             circle.style.transform = `rotate(-${currentSpins * 360 + circlePointerPosition}deg)`;
@@ -73,6 +98,7 @@
             setTimeout(() => {
                 spinMusicSound.pause();
                 spinMusicSound.currentTime = 0;
+                resultBlock.innerText = values[selectedSegment].value;
 
                 if (!values[selectedSegment].bad) {
                     dingSound.play();

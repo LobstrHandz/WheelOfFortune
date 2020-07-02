@@ -2,6 +2,7 @@ html,
 body {
     height: 100%;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .hidden {
@@ -22,19 +23,18 @@ body {
     width: 160px;
     top: calc(50% - 30px);
     left: calc(50% - 80px);
-    background: gold;
-    border: 3px solid purple;
+    background: white;
+    border: 3px solid rgb(51, 51, 51);
     border-radius: 3px;
     font-size: 30px;
     font-weight: bold;
-    color: purple;
+    color: rgb(51, 51, 51);
     outline: none;
     cursor: pointer;
 }
 
 .play-button:hover {
-    background: gold;
-    box-shadow: 0px 0px 3px 3px purple;
+    box-shadow: 0px 0px 3px 3px rgb(51, 51, 51);
 }
 
 .logo {
@@ -58,21 +58,86 @@ body {
     position: absolute;
 }
 
+.play-area {
+    position: fixed;
+    top: calc(50vh - 150px);
+    left: 5vw;
+}
+
+.result-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    width: 400px;
+    top: 100px;
+    left: 445px;
+    background: white;
+    border: 3px solid rgb(51, 51, 51);
+    border-radius: 10px;
+}
+
+.result-container span {
+    margin-left: 55px;
+    max-width: 250px;
+    color: rgb(51, 51, 51);
+    font-size: 20px;
+}
+
 .circle-container {
     position: fixed;
-    top: 50vh;
-    left: 15vw;
-    width: 225px;
-    /* transform: rotate(90deg); */
+    width: 500px;
+    transform: rotate(90deg);
+}
+
+.circle-border {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    height: 506px;
+    width: 506px;
+    background: black;
+    border-radius: 50%;
 }
 
 .circle {
-    height: 225px;
-    width: 225px;
-    background: url(./assets/circle.png);
-    background-size: cover;
+    position: relative;
+    height: 500px;
+    width: 500px;
+    overflow: hidden;
+    background: black;
+    border-radius: 50%;
     cursor: pointer;
     transition: transform 10s ease-out;
+}
+
+.triangle {
+    position: absolute;
+    top: 0px;
+    width: 0;
+    height: 0;
+    border-left: 0 solid transparent;
+    border-right: 0 solid transparent;
+    transform-origin: 50% 100%;
+    text-align: end;
+}
+
+.triangle:nth-child(even) {
+    border-top: 250px solid white;
+    color: rgb(51, 51, 51);
+}
+
+.triangle:nth-child(odd) {
+    border-top: 250px solid rgb(51, 51, 51);
+    color: white;
+}
+
+.triangle span {
+    position: absolute;
+    height: auto;
+    width: auto;
+    transform: rotate(-90deg);
 }
 
 .circle.disabled {
